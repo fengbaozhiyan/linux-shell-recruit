@@ -16,8 +16,10 @@ if [[ ! -f "$file" ]]; then
     echo "Error: file not found: $file"
     exit 1
 fi
+
 # 3. 统计 ERROR 总数
 total_error=$(grep -c "ERROR" "$file")
+
 # 4. 找出出现次数最多的 Code
 top_code=$(awk '/ERROR/ {
         for (i = 1; i <= NF; i++) {
@@ -32,6 +34,7 @@ top_code=$(awk '/ERROR/ {
     | sort -rn \
     | head -n 1 \
     | awk '{print $2}')
+
 # 5. 输出结果
 echo "Total ERROR: $total_error"
 echo "Top Code: $top_code"
